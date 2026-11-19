@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Love Card ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#ffb6cf,#ffd9e8,#ffc1dc);
+}
+
+.card {
+    width: 90%;
+    max-width: 390px;
+    padding: 30px 22px;
+    text-align: center;
+    background: rgba(255,255,255,.9);
+    border-radius: 28px;
+    box-shadow: 0 10px 40px #d66b9c;
+    z-index: 2;
+    animation: appear 1.5s ease;
+}
+
+@keyframes appear {
+    from {opacity:0; transform:translateY(30px);}
+    to {opacity:1; transform:translateY(0);}
+}
+
+.heart {
+    font-size: 70px;
+    animation: beat 1s infinite;
+}
+
+@keyframes beat {
+    50% {transform:scale(1.2);}
+}
+
+h1 {
+    color: #e84383;
+}
+
+p {
+    color: #bb4776;
+    line-height: 1.7;
+}
+
+button {
+    display: block;
+    width: 100%;
+    margin-top: 13px;
+    padding: 13px;
+    border: none;
+    border-radius: 30px;
+    background: #ed6a9c;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(.96);
+}
+
+#message {
+    color: #e84383;
+    font-weight: bold;
+    margin-top: 18px;
+    min-height: 45px;
+}
+
+.letter {
+    display: none;
+    background: #fff0f5;
+    padding: 15px;
+    border-radius: 15px;
+    margin-top: 15px;
+    color: #c44569;
+    line-height: 1.7;
+}
+
+.floating {
+    position: fixed;
+    bottom: -30px;
+    font-size: 22px;
+    animation: floatUp 6s linear forwards;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="heart">❤️</div>
+
+    <h1>For You 💗</h1>
+
+    <p>
+        မင်းအတွက် အထူးပြုလုပ်ထားတဲ့
+        Love Card လေးပါ။
+        မင်းအမြဲတမ်း ပျော်ရွှင်နေပါစေ။
+    </p>
+
+    <button onclick="showLove()">
+        💕 Love Message
+    </button>
+
+    <div id="message"></div>
+
+    <button onclick="openLetter()">
+        💌 Open Love Letter
+    </button>
+
+    <div class="letter" id="letter">
+        မင်းဟာ တကယ်ကို ထူးခြားတဲ့သူတစ်ယောက်ပါ။
+        မင်းရဲ့အပြုံးလေးတွေ အမြဲရှိနေပါစေ။
+        ဘယ်တော့မှ ဝမ်းမနည်းပါနဲ့နော်။ ❤️
+    </div>
+
+    
+
+</div>
+
+<script>
+const messages = [
+    "မင်းကို အရမ်းတန်ဖိုးထားတယ် ❤️",
+    "မင်းရဲ့အပြုံးလေးက အရမ်းလှတယ် 💗",
+    "အမြဲတမ်း ပျော်ရွှင်နေပါစေ 🥰",
+    "ဒီကမ္ဘာမှာ မင်းက ထူးခြားတဲ့သူပါ 💕",
+    "Sending you lots of love 💖"
+];
+
+let index = 0;
+
+function showLove() {
+    document.getElementById("message").innerText =
+        messages[index];
+
+    index = (index + 1) % messages.length;
+}
+
+function openLetter() {
+    const letter = document.getElementById("letter");
+
+    letter.style.display =
+        letter.style.display === "block" ? "none" : "block";
+}
+
+function toggleMusic() {
+    const music = document.getElementById("music");
+
+    if (music.paused) {
+        music.play();
+    } else {
+        music.pause();
+    }
+}
+
+// Floating hearts and flowers
+function createFloating() {
+    const item = document.createElement("div");
+
+    item.className = "floating";
+
+    const emojis = ["❤️","💕","💗","🌸","💖","🌷"];
+
+    item.innerText =
+        emojis[Math.floor(Math.random() * emojis.length)];
+
+    item.style.left = Math.random() * 100 + "vw";
+    item.style.animationDuration =
+        (4 + Math.random() * 4) + "s";
+
+    document.body.appendChild(item);
+
+    setTimeout(() => item.remove(), 8000);
+}
+
+setInterval(createFloating, 450);
+</script>
+
+</body>
+</html>
